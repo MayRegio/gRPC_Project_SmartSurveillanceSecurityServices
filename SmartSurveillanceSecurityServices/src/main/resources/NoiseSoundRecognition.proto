@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_package = "gRPC_Project";
+option java_multiple_files = true;
+option java_outer_classname = "SmartSurveillanceSecurityServiceImpl";
+
+service NoiseSoundRecognition {
+	//server streaming
+	rpc noiseRecognition (textRequest) returns (stream textResponse){}
+
+	//unary
+	rpc textToTheClient (messageRequest) returns (messageResponse){}
+}
+
+//server streaming
+message textRequest {
+	string text = 1;
+}
+
+message textResponse {
+	string noiseToTex = 1;
+}
+
+//unary
+message messageRequest {
+	string textMessage = 1;
+}
+
+message messageResponse {
+	string textMessageOut = 1;
+}

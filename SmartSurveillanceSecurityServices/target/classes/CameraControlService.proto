@@ -1,0 +1,38 @@
+syntax = "proto3"; //version of Protobuf that we are using
+
+//it is also the same as groupID on prom file
+option java_package = "gRPC_Project"; //this arguments are specific to Java code, where the package will auto-generate the code from the proto.file
+option java_multiple_files = true; //multiple files is always true as we will have more than 1
+//this is also the same name as artifactID
+option java_outer_classname = "SmartSurveillanceSecurityServiceImpl"; //naming the class
+
+//Here we will define the name of the service and the method to it will be called
+service CameraControlService {
+	//bi-directional method
+	rpc turnOnOffCamera (stream cameraRequest) returns (stream cameraResponse){} //the turnOnAndOffCamera function takes in the input cameraRequest and returns the cameraResponse
+
+	//client streaming method
+	rpc cameraRecording (stream recordingRequest) returns (recordingResponse){} //here the CameraRecording function takes in the input recordingRequest and returns the recordingResponse
+}
+
+
+//Here we will define the attributes - a single messsage - of our request(object)
+message cameraRequest {
+	bool turnCameraOn = 1; //bool because is true or false statement, and 1 is just a tag not its content
+}
+
+//Here we will define the attribute that the server will send back to the client request
+message cameraResponse {
+	bool turnCameraOff = 1;
+}
+
+//client streaming
+message recordingRequest {
+	string recordingOn = 1;
+}
+
+
+message recordingResponse {
+	string recordingOutput = 1;
+}
+
